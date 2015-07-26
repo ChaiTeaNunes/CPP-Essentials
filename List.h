@@ -1,6 +1,6 @@
 /*
 Lists that can be manipulated qucikly and easily. With influence of Java ArrayLists (java.util.ArrayList)
-Author: Chaiyawat Nunes (thaiberius.code@gmail.com)
+Author: Chaiyawat Nunes (chaiteanunes@gmail.com) (https://github.com/ChaiTeaNunes)
 Lisence: GNU GPL v2.0 (http://www.gnu.org/licenses/gpl.txt)
 */
 
