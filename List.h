@@ -29,6 +29,28 @@ private:
 	 */
 	int size;
 
+	/**
+	 * An algorithim used for QuickSort. 
+	 */
+	void baseSort() {
+		if (getSize() > 1) {
+        	removeAt(wall);
+        	List<TYPE> lower();
+        	List<TYPE> higher();
+			TYPE wall = get(0);
+        	for (int i = 0; i < getSize(); i++) {
+            	if (get(i) < wall) {
+                	lower.add(i);
+            	} else if (get(i) == wall) {
+					lower.add(i);
+					placement = lower.getSize();
+				} else {
+                	higher.add(i);
+				}
+			}
+		}
+	}
+
 public:
 
   	/**
@@ -323,22 +345,12 @@ public:
         	List<TYPE> lower();
         	List<TYPE> higher();
 			for (int j = 0; j < getSize(); j++) {
-				TYPE wall = get(placement);
-        		for (int i = 0; i < getSize(); i++) {
-            		if (get(i) < wall) {
-                		lower.add(i);
-            		} else if (get(i) == wall) {
-						lower.add(i);
-						placement = lower.getSize();
-					} else {
-                		higher.add(i);
-					}
-				}
+				baseSort();
 				for (int i = 0; i < getSize(); i++) {
 					add(lower.get(i));
 					add(higher.get(i));
-					lower.clear();
-					higher.clear();
+					lower.baseSort();
+					higher.baseSort();
 				}
 			}
 		}
