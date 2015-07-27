@@ -29,38 +29,16 @@ private:
 	 */
 	int size;
 
-	/**
-	 * An algorithim used for QuickSort. 
-	 */
-	void baseSort() {
-		if (getSize() > 1) {
-        	removeAt(wall);
-        	List<TYPE> lower();
-        	List<TYPE> higher();
-			TYPE wall = get(0);
-        	for (int i = 0; i < getSize(); i++) {
-            	if (get(i) < wall) {
-                	lower.add(i);
-            	} else if (get(i) == wall) {
-					lower.add(i);
-					placement = lower.getSize();
-				} else {
-                	higher.add(i);
-				}
-			}
-		}
-	}
-
 public:
 
-  	/**
+	  /**
 	 * Returns the size of the list, which is crucial for sorting.
 	 *
 	 * @return	the size of the list
 	 */
 	int getSize() {
-    	return size;
-  	}
+		return size;
+	  }
 
 	/**
 	 * Returns an object that can be manipulated and accessed.
@@ -68,18 +46,18 @@ public:
 	 * @param	index	the index to locate the object within the list
 	 * @return	the object at the give index of the list
 	 */
-  	TYPE &operator[](int index) {
-    	return objects[index];
-  	}
+	  TYPE &operator[](int index) {
+		return objects[index];
+	  }
 
- 	/**
+	 /**
 	 * Returns an object that can be manipulated and accessed.
 	 *
 	 * @param	index	the index to locate the object within the list
 	 * @return	the object at the give index of the list
 	 */
 	TYPE get(int index) {
-    	return objects[index];
+		return objects[index];
 	}
 
 	/**
@@ -111,12 +89,12 @@ public:
 		objects = list;
 	}
 
-  	/**
+	  /**
 	 * Sets the size of the list, trimming objects from the end and seting new objects to 0.
 	 *
 	 * @param	newSize	the new size of the list
 	 */
-  	void setSize(int newSize) {
+	  void setSize(int newSize) {
 		TYPE * newObjects = new TYPE[newSize];
 		if (objects != nullptr) {
 			for (int i = 0; i < newSize; i++) {
@@ -132,17 +110,17 @@ public:
 		setSize(newSize);
 	}
 
-  	/**
+	  /**
 	 * Sets the object at the given index of the list.
 	 *
 	 * @param	index	the index to locate the object within the list
 	 * @param	value	the new value for the selected object
 	 */
 	void set(int index, TYPE value) {
-    	objects[index] = value;
-  	}
+		objects[index] = value;
+	  }
 
-  	/**
+	  /**
 	 * Adds an object to the end of the list.
 	 *
 	 * @param	value	the new value for the new object
@@ -178,7 +156,7 @@ public:
 		set(index, value);
 	}
 
-  	/**
+	  /**
 	 * Removes and object at the given index and moves the object after the index of the list.
 	 *
 	 * @param	index	the location of the new object
@@ -190,46 +168,46 @@ public:
 		setSize(getSize() - 1);
 	}
 
-  	/**
+	  /**
 	 * Swaps two objects in the list.
 	 *
 	 * @param	index1	first index to swap
 	 * @param	index2	second index to swap
 	 */
 	void swap(int index1, int index2) {
-    	TYPE temp = get(index2);
-    	set(end, get(index1));
-    	set(index1, temp);
-  	}
+		TYPE temp = get(index2);
+		set(end, get(index1));
+		set(index1, temp);
+	  }
 
-  	/**
+	  /**
 	 * Moves an object to a new place in the list.
 	 *
 	 * @param	start	the beginning location of the object
 	 * @param	end		the ending location of the object
 	 */
-  	void move(int start, int end) {
-    	insert(end, get(start));
-    	removeAt(start);
-  	}
+	  void move(int start, int end) {
+		insert(end, get(start));
+		removeAt(start);
+	  }
 
-  	/**
+	  /**
 	 * Moves an object to the front of the list.
 	 *
 	 * @param	index	the location of the object to move to the front
 	 */
-  	void moveToFront(int index) {
-    	move(index, 0);
-  	}
+	  void moveToFront(int index) {
+		move(index, 0);
+	  }
 
-  	/**
+	  /**
 	 * Sets an object of the list to 0.
 	 *
 	 * @param	index	the location of the object to set to 0
 	 */
-  	void reset(int index) {
-    	set(index, 0);
-  	}
+	  void reset(int index) {
+		set(index, 0);
+	  }
 
 	/**
 	 * Checks of the list is empty or not.
@@ -330,27 +308,6 @@ public:
 					if (get(j) > get(j + 1)) {
 						swap(j, j + 1);
 					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * O(n log(n)) and o(n^2) Quick Sort
-	 */
-	void quickSort() {
-		if (getSize() > 1) {
-			int placement = 0;
-        	removeAt(wall);
-        	List<TYPE> lower();
-        	List<TYPE> higher();
-			for (int j = 0; j < getSize(); j++) {
-				baseSort();
-				for (int i = 0; i < getSize(); i++) {
-					add(lower.get(i));
-					add(higher.get(i));
-					lower.baseSort();
-					higher.baseSort();
 				}
 			}
 		}
