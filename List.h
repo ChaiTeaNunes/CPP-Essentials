@@ -279,6 +279,52 @@ public:
 	}
 
 	/**
+	 * O(n) and o(n^2) Insertion Sort.
+	 */
+	void insertionSort() {
+		for (int i = 0; i < getSize(); i++) {
+			TYPE temp = get(i);
+			int j;
+			for (int j = i - 1; j >= 0 && temp < get(j); j--) {
+				set(j + 1, get(j));
+			}
+			set(j + 1, temp);
+		}
+	}
+
+	/**
+	 * O(nlog(n)) and o(n^2) Quick Sort.
+	 */
+	void quickSort(int left, int right) {
+		int i = left, j = right;
+		TYPE temp;
+		TYPE pivot = get(j / 2);
+
+		while(i <= j) {
+			while(get(i) < pivot) {
+				i++;
+			}
+			while(get(j) > pivot) {
+				j--;
+			}
+			if(i <= j) {
+				temp = get(i);
+				set(i, get(j));
+				set(j, temp);
+				i++;
+				j--;
+			}
+		}
+
+		if(left < j) {
+			quickSort(left, j);
+		}
+		if(i < right) {
+			quickSort(i, right);
+		}
+	}
+
+	/**
 	 * Default Constructor.
 	 */
 	List() : objects(nullptr), size(0) { }
