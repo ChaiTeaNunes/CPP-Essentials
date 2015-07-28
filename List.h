@@ -1,7 +1,7 @@
 /*
-Lists that can be manipulated qucikly and easily. With influence of Java ArrayLists (java.util.ArrayList)
-Author: Chaiyawat Nunes (chaiteanunes@gmail.com) (https://github.com/ChaiTeaNunes)
-Lisence: GNU GPL v2.0 (http://www.gnu.org/licenses/gpl.txt)
+Lists that can be manipulated qucikly and easily. With influence of Java ArrayLists (java.util.ArrayList).
+Author: Chaiyawat Nunes (chaiteanunes@gmail.com) (https://github.com/ChaiTeaNunes).
+Lisence: GNU GPL v2.0 (http://www.gnu.org/licenses/gpl.txt).
 */
 
 #ifndef __LIST__
@@ -10,7 +10,7 @@ Lisence: GNU GPL v2.0 (http://www.gnu.org/licenses/gpl.txt)
 #include <typeinfo>
 
 /**
- * Lists that can be manipulated qucikly and easily. With influence of Java ArrayLists (java.util.ArrayList)
+ * Lists that can be manipulated qucikly and easily. With influence of Java ArrayLists (java.util.ArrayList).
  *
  * @author	Chaiyawat Nunes	thaiberius.code@gmail.com
  * @version	1.0
@@ -31,14 +31,14 @@ private:
 
 public:
 
-	  /**
+	/**
 	 * Returns the size of the list, which is crucial for sorting.
 	 *
 	 * @return	the size of the list
 	 */
 	int getSize() {
 		return size;
-	  }
+	}
 
 	/**
 	 * Returns an object that can be manipulated and accessed.
@@ -46,11 +46,11 @@ public:
 	 * @param	index	the index to locate the object within the list
 	 * @return	the object at the give index of the list
 	 */
-	  TYPE &operator[](int index) {
+	TYPE &operator[](int index) {
 		return objects[index];
-	  }
+	}
 
-	 /**
+	/**
 	 * Returns an object that can be manipulated and accessed.
 	 *
 	 * @param	index	the index to locate the object within the list
@@ -61,56 +61,23 @@ public:
 	}
 
 	/**
-	 * Sets all the whole list to be another list.
-	 *
-	 * @param	list	the new list
-	 */
-	void setList(List list) {
-		if(typeid(list).name() == typeid(objects).name()) {
-			objects = list;
-		}
-	}
-
-	/**
-	 * Sets all the whole list to be another list.
-	 *
-	 * @param	list	the new list
-	 */
-	void setList(TYPE [] list) {
-		objects = list;
-	}
-
-	/**
-	 * Sets all the whole list to be another list.
-	 *
-	 * @param	list	the new list
-	 */
-	void setList(TYPE * list) {
-		objects = list;
-	}
-
-	  /**
 	 * Sets the size of the list, trimming objects from the end and seting new objects to 0.
 	 *
 	 * @param	newSize	the new size of the list
 	 */
-	  void setSize(int newSize) {
+	void setSize(int newSize) {
 		TYPE * newObjects = new TYPE[newSize];
 		if (objects != nullptr) {
-			for (int i = 0; i < newSize; i++) {
-				if (i < getSize()) {
-					newObjects[i] = get(i);
-				} else {
-					newObjects[i] = 0;
-				}
+			for (int i = 0; i < newSize && i < getSize(); i++) {
+				newObjects[i] = get(i);
 			}
 			delete[] objects;
 		}
-		setList(newObjects);
-		setSize(newSize);
+		objects = newObjects;
+		size = newSize;
 	}
 
-	  /**
+	/**
 	 * Sets the object at the given index of the list.
 	 *
 	 * @param	index	the index to locate the object within the list
@@ -118,9 +85,9 @@ public:
 	 */
 	void set(int index, TYPE value) {
 		objects[index] = value;
-	  }
+	}
 
-	  /**
+	/**
 	 * Adds an object to the end of the list.
 	 *
 	 * @param	value	the new value for the new object
@@ -156,7 +123,7 @@ public:
 		set(index, value);
 	}
 
-	  /**
+	/**
 	 * Removes and object at the given index and moves the object after the index of the list.
 	 *
 	 * @param	index	the location of the new object
@@ -168,7 +135,7 @@ public:
 		setSize(getSize() - 1);
 	}
 
-	  /**
+	/**
 	 * Swaps two objects in the list.
 	 *
 	 * @param	index1	first index to swap
@@ -178,36 +145,36 @@ public:
 		TYPE temp = get(index2);
 		set(end, get(index1));
 		set(index1, temp);
-	  }
+	}
 
-	  /**
+	/**
 	 * Moves an object to a new place in the list.
 	 *
 	 * @param	start	the beginning location of the object
 	 * @param	end		the ending location of the object
 	 */
-	  void move(int start, int end) {
+	void move(int start, int end) {
 		insert(end, get(start));
 		removeAt(start);
-	  }
+	}
 
-	  /**
+	/**
 	 * Moves an object to the front of the list.
 	 *
 	 * @param	index	the location of the object to move to the front
 	 */
-	  void moveToFront(int index) {
+	void moveToFront(int index) {
 		move(index, 0);
-	  }
+	}
 
-	  /**
+	/**
 	 * Sets an object of the list to 0.
 	 *
 	 * @param	index	the location of the object to set to 0
 	 */
-	  void reset(int index) {
+	void reset(int index) {
 		set(index, 0);
-	  }
+	}
 
 	/**
 	 * Checks of the list is empty or not.
@@ -233,13 +200,9 @@ public:
 	 * Flips all of the objects in the list.
 	 */
 	void flip() {
-		TYPE * flipped = new TYPE[getSize()];
-		for(int i = 0; i < getSize(); i++) {
-			for(int j = getSize() - 1; j <= 0; j--) {
-				flipped[i] = j;
-			}
+		for (int i = 0; i < getSize() / 2; i++) {
+			swap(i, getSize() - 1 - i);
 		}
-		setList(flipped);
 	}
 
 	/**
@@ -260,10 +223,11 @@ public:
 	bool isZeroPresent() {
 		for (int i = 0; i < getSize(); i++) {
 			bool foundZero;
-			if(isZero(i)) {
+			if (isZero(i)) {
 				foundZero = true;
 				break;
-			} else {
+			}
+			else {
 				foundZero = false;
 			}
 		}
@@ -276,13 +240,14 @@ public:
 	 * @returns the location of the first 0 in the list or 0 if there is not 0 present.]
 	 */
 	int getZeroIndex() {
-		if(isZeroPresent()) {
+		if (isZeroPresent()) {
 			for (int i = 0; i < getSize(); i++) {
 				if (isZero(i)) {
 					return i;
 				}
 			}
-		} else {
+		}
+		else {
 			return 0;
 		}
 	}
@@ -293,17 +258,17 @@ public:
 	void clear(){
 		if (objects != nullptr) {
 			delete[] objects;
-			setList(nullptr);
+			objects = nullptr;
 			setSize(0);
 		}
 	}
 
 	/**
-	 * O(n) and o(n^2) Bubble Sort
+	 * O(n) and o(n^2) Bubble Sort.
 	 */
 	void bubbleSort() {
-		if(getSize() > 1){
-			for(int i = 0; i < getSize(); i++) {
+		if (getSize() > 1){
+			for (int i = 0; i < getSize(); i++) {
 				for (int j = 0; j < getSize() - j; j++) {
 					if (get(j) > get(j + 1)) {
 						swap(j, j + 1);
@@ -331,7 +296,7 @@ public:
 	 * Deconstructor.
 	 */
 	~List() {
-		reset();
+		clear();
 	}
 };
 
