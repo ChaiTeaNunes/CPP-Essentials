@@ -102,19 +102,6 @@ public:
 	 *
 	 * @param	index	the location of the new object
 	 */
-	void insert(int index) {
-		setSize(getSize() + 1);
-		for (int i = getSize() - 1; i > index; i--) {
-			set(i, get(i - 1));
-		}
-		set(index, 0);
-	}
-
-	/**
-	 * Adds an object at the given index and moves the objects after the index of the list.
-	 *
-	 * @param	index	the location of the new object
-	 */
 	void insert(int index, TYPE value) {
 		setSize(getSize() + 1);
 		for (int i = getSize() - 1; i > index; i--) {
@@ -143,7 +130,7 @@ public:
 	 */
 	void swap(int index1, int index2) {
 		TYPE temp = get(index2);
-		set(end, get(index1));
+		set(index2, get(index1));
 		set(index1, temp);
 	}
 
@@ -165,15 +152,6 @@ public:
 	 */
 	void moveToFront(int index) {
 		move(index, 0);
-	}
-
-	/**
-	 * Sets an object of the list to 0.
-	 *
-	 * @param	index	the location of the object to set to 0
-	 */
-	void reset(int index) {
-		set(index, 0);
 	}
 
 	/**
@@ -200,55 +178,8 @@ public:
 	 * Flips all of the objects in the list.
 	 */
 	void flip() {
-		for (int i = 0; i < getSize() / 2; i++) {
-			swap(i, getSize() - 1 - i);
-		}
-	}
-
-	/**
-	 * Checks to see if the given object of the list is 0.
-	 *
-	 * @param	index	the location of the object to compare
-	 * @returns	true if the object's value is 0
-	 */
-	bool isZero(int index) {
-		return equals(i, 0);
-	}
-
-	/**
-	 * Checks if 0 is present in the list.
-	 *
-	 * @returns true if a zero is present
-	 */
-	bool isZeroPresent() {
 		for (int i = 0; i < getSize(); i++) {
-			bool foundZero;
-			if (isZero(i)) {
-				foundZero = true;
-				break;
-			}
-			else {
-				foundZero = false;
-			}
-		}
-		return foundZero;
-	}
-
-	/**
-	 * Gets the index of the first 0 in the list.
-	 *
-	 * @returns the location of the first 0 in the list or 0 if there is not 0 present.]
-	 */
-	int getZeroIndex() {
-		if (isZeroPresent()) {
-			for (int i = 0; i < getSize(); i++) {
-				if (isZero(i)) {
-					return i;
-				}
-			}
-		}
-		else {
-			return 0;
+			set(i, getSize() - 1 - i);
 		}
 	}
 
@@ -285,42 +216,10 @@ public:
 		for (int i = 0; i < getSize(); i++) {
 			TYPE temp = get(i);
 			int j;
-			for (int j = i - 1; j >= 0 && temp < get(j); j--) {
+			for (j = i - 1; j >= 0 && temp < get(j); j--) {
 				set(j + 1, get(j));
 			}
 			set(j + 1, temp);
-		}
-	}
-
-	/**
-	 * O(nlog(n)) and o(n^2) Quick Sort.
-	 */
-	void quickSort(int left, int right) {
-		int i = left, j = right;
-		TYPE temp;
-		TYPE pivot = get(j / 2);
-
-		while(i <= j) {
-			while(get(i) < pivot) {
-				i++;
-			}
-			while(get(j) > pivot) {
-				j--;
-			}
-			if(i <= j) {
-				temp = get(i);
-				set(i, get(j));
-				set(j, temp);
-				i++;
-				j--;
-			}
-		}
-
-		if(left < j) {
-			quickSort(left, j);
-		}
-		if(i < right) {
-			quickSort(i, right);
 		}
 	}
 
@@ -335,7 +234,9 @@ public:
 	 * @param	size	the size of the list
 	 */
 	List(int size) : objects(nullptr), size(size) {
-		setSize(size);
+		for(int i = 0; i < size; i++) {
+			add();
+		}
 	}
 
 	/**
